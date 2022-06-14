@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" ,type="text/css" , href="{{ url_for('static',filename='styles/style.css') }}">
+    <script src="{{url_for('static', filename='login.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" , content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
+</head>
+
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="" method="post">
+                <h1>Sign Up</h1>
+                <br>
+                <span></span>
+                {{ form.hidden_tag() }}
+                {{ form.firstname(size=32, placeholder = "First Name", class_="input--style-2") }}
+                {{ form.lastname(size=32, placeholder = "Last Name", class_="input--style-2") }}
+                {{ form.email(size=32, placeholder = "Email", class_="input--style-2") }}
+                {{ form.password1(size=32, placeholder = "Password", class_="input--style-2") }}
+                {{ form.password2(size=32, placeholder = "Confirm password", class_="input--style-2") }}
+
+                <br>
+                <!-- <button name="action" id="signin" value="Sign In">Sign In</button> -->
+                <p onclick="location.href='/login'"><a>Already have an account? <b>Log In.</b></a></p>
+
+                <br>
+                {% for message in get_flashed_messages() %}
+                <p style="color: red;">{{ message }}</p>
+                {% endfor %}
+
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Profile Details!</h1>
+                    <br>
+                    {{form.bankName(size=32, placeholder = "Bank Name", class_="input--style-1")}}
+                    {{form.acctNumber(size=32, placeholder = "Account Number", class_="input--style-1")}}
+                    {{form.acctHolder(size=32, placeholder = "Account Holder Name", class_="input--style-1")}}
+                    {{form.IFSC(size=32, placeholder = "IFSC", class_="input--style-1")}}
+                    {{form.PAN(size=32, placeholder = "PAN", class_="input--style-1")}}
+                    <br>
+                    <br>
+                    <!-- onclick="location.href='/register'" -->
+                    <button class="ghost" name="action" id="signin" value="Sign In">Create Account</button>
+                    <!-- <button class="ghost" name="action" id="signUp" type="Submit">Sign Up</button> -->
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

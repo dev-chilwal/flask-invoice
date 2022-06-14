@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title Page-->
+    <title>Register</title>
+
+    <!-- Main CSS-->
+    <link rel="stylesheet" ,type="text/css" , href="{{ url_for('static',filename='styles/main.css') }}">
+
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Registration Form</h2>
+                    <form method="POST">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">first name</label> -->
+                                    {{ form.firstname(size=32, placeholder = "Firstname", class="input--style-4") }}
+
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">last name</label> -->
+                                    {{ form.lastname(size=32, placeholder = "Lastname", class="input--style-4") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Email</label> -->
+                                    {{ form.email(size=32, placeholder = "Email", class="input--style-4") }}
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Phone Number</label> -->
+                                    {{ form.phonenum(size=32, placeholder = "Phone", class="input--style-4") }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Password</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.password1(size=32, placeholder = "password", class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Confirm Password</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.password2(size=32, placeholder = "Confirm password",
+                                        class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Bank Name</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.bankName(size=32, placeholder="Bank Name", class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <!-- <label class="label">Account Holder Name</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.acctHolder(size=32, placeholder = "Account Holder",
+                                        class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <!-- <label class="label">Account Number</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.acctNumber(size=16, placeholder="Account Number",
+                                        class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <!-- <label class="label">IFSC</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.IFSC(size=8, placeholder = "IFSC",
+                                        class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <!-- <label class="label">PAN</label> -->
+                                    <div class="input-group-icon">
+                                        {{ form.PAN(size=8, placeholder = "PAN",
+                                        class="input--style-4") }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit" style="float: right;"
+                                onclick="location.href='/'" type="button">Log
+                                In</button>
+                            {% for message in get_flashed_messages() %}
+                            <p style="color: red;">{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <script src="vendor/datepicker/moment.min.js"></script>
+    <script src="vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

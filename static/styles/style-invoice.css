@@ -1,0 +1,323 @@
+*,
+*:before,
+*:after {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@viewport {
+    width: device-width;
+    zoom: 1.0;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: #384047;
+}
+
+form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+
+h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+}
+
+
+h4 {
+    position: relative;
+    right: 200px;
+    float: right;
+}
+
+hr {
+    margin-top: -15px;
+    border-top: 1px dashed #3ac162;
+}
+
+input[name="infProgram"] {
+    width: 50%;
+    float: left;
+}
+
+input[name="campaignMonth"] {
+    width: 30%;
+    float: right;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="tel"],
+input[type="time"],
+input[type="url"],
+textarea,
+select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 5px;
+    width: 100%;
+    background-color: #e8eeef;
+    /*color: #8a97a0;*/
+    color: #610455;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 10px;
+}
+
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+}
+
+select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+}
+
+label {
+    cursor: pointer;
+    display: inline-block;
+}
+
+#fa-cloud-upload {
+    color: #EA4C89;
+}
+
+#upload-photo1 {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#upload-photo3 {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+input[id="upload1"],
+input[id="upload3"] {
+    float: right;
+    position: relative;
+    margin-top: -30px;
+}
+
+input[id="Submit"] {
+    background-color: #EA4C89;
+    width: 100%;
+    border-radius: 8px;
+    border-style: none;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    height: 40px;
+    line-height: 20px;
+    list-style: none;
+    margin: 0;
+    outline: none;
+    padding: 10px 16px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition: color 100ms;
+    vertical-align: baseline;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-1:hover,
+.button-1:focus {
+    background-color: #F082AC;
+}
+
+
+.button-64:active,
+.button-64:hover {
+    outline: 0;
+}
+
+.button-64 span {
+    background-color: rgb(5, 6, 45);
+    padding: 16px 24px;
+    border-radius: 6px;
+    width: 100%;
+    height: 100%;
+    transition: 300ms;
+}
+
+.button-64:hover span {
+    background: none;
+}
+
+@media (min-width: 768px) {
+    .button-64 {
+        font-size: 24px;
+        min-width: 196px;
+    }
+}
+
+
+.button-33:hover {
+    box-shadow: rgba(44, 187, 99, .35) 0 -25px 18px -14px inset, rgba(44, 187, 99, .25) 0 1px 2px, rgba(44, 187, 99, .25) 0 2px 4px, rgba(44, 187, 99, .25) 0 4px 8px, rgba(44, 187, 99, .25) 0 8px 16px, rgba(44, 187, 99, .25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}
+
+
+input[type="button"] {
+    float: right;
+    color: #FFF;
+    margin-top: -70px;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 15%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+    margin-bottom: 10px;
+}
+
+input[name="description1"],
+input[name="description2"],
+input[name="description3"] {
+    width: 70%;
+    float: left;
+}
+
+input[name="IFSC"] {
+    width: 50%;
+    float: left;
+}
+
+
+input[name="amount1"],
+input[name="amount2"],
+input[name="amount3"],
+input[name="PAN"],
+input[name="infProgram"] {
+    width: 25%;
+    float: right;
+}
+
+input[name="PAN"] {
+    width: 45%;
+    float: right;
+}
+
+.description {
+    width: 100%;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.upload-group1 {
+    position: absolute;
+    display: inline-block;
+    width: fit-content;
+    top: 40px;
+    left: 0px;
+}
+
+.upload-group2 {
+    position: absolute;
+    display: inline-block;
+    top: 65px;
+    left: 50px;
+
+}
+
+input[name="total_fee"] {
+    width: 25%;
+    float: right;
+    background: rgba(108, 9, 9, 0.1);
+    border: none;
+    font-size: 18px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 5px;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    margin-bottom: 10px;
+}
+
+fieldset {
+    margin-bottom: 30px;
+    border: none;
+}
+
+legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+label.light {
+    font-weight: 300;
+    display: inline;
+}
+
+.number {
+    background-color: #EA4C89;
+    color: #fff;
+    height: 28px;
+    width: 28px;
+    display: inline-block;
+    font-size: 0.7em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+    border-radius: 100%;
+}
+
+.input--style-4 {
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+
+}
+
+@media screen and (min-width: 240px) {
+
+    .left,
+    .main,
+    .right {
+        width: 100%;
+        /* The width is 100%, when the viewport is 800px or smaller */
+    }
+
+    form {
+        max-width: 640px;
+    }
+
+}

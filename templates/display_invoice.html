@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" ,type="text/css" , href="{{ url_for('static',filename='styles/style-display-pdf.css') }}">
+    <title>Invoice Preview</title>
+</head>
+
+<body>
+    <form id="invoice" action="" method="post" enctype="multipart/form-data"
+        onsubmit="document.getElementById('genInvoice').style.backgroundColor='#e7e7e7';">
+        <div></div>
+        <h2 style="text-align: center;">Invoice Preview</h2>
+        <p style="font-size: 1rem; color: #4bc970l; margin: left 20px;">
+            <a href="{{url_for('invoice')}}">&#60;&#60;Back</a>
+        </p>
+        <input type="submit" name="action" id="genInvoice" value="Submit" style="float: right;">
+        <div>
+            <center>
+                <embed src="/static/uploads/{{session['email']}}/{{session['invoice']}}" type="application/pdf"
+                    scrolling="auto" width="800px" height="800px" />
+
+            </center>
+
+        </div>
+    </form>
+
+</body>
+
+</html>

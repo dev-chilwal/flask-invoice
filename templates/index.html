@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" ,type="text/css" , href="{{ url_for('static',filename='styles/style-invoice.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="{{url_for('static', filename='js/sum.js')}}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" , content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Invoice</title>
+</head>
+
+<body onload="notEmpty()">
+
+    <form id="invoice" action="" name="invoice" method="post" enctype="multipart/form-data" onload="findTotal()"
+        onsubmit="let x = document.getElementById('splash'); x.style.display = 'block'; document.getElementById('Submit').style.backgroundColor='#e7e7e7';">
+
+        <div>
+            <h1>Generate Invoice</h1>
+            <h3 style=" font-size: 1rem;color: #EA4C89""> {{session['email']}}</h3>
+        <button id=" SignOut" onclick="location.href='/logout'" type="button" style="float: right; margin-top:-40px">
+                Sign Out
+                </button>
+        </div>
+        <fieldset>
+            <legend><span class=" number">1</span>Your basic info</legend>
+            {{ form.hidden_tag() }}
+
+
+            {{ form.name.label }} {{ form.name(size=32, placeholder = "Name") }}
+
+            {{ form.address.label}} {{ form.address(size=32, placeholder = "Address") }}
+            <div>
+                <div style="width: 50%; float: left;">{{ form.infProgram.label}}{{ form.infProgram() }}</div>
+                <div style="width: 25%; float: right;">{{ form.campaignMonth.label}} {{
+                    form.campaignMonth(id="Month",
+                    onchange="notEmpty()") }} </div>
+                <div style="width: 20%; float: right; margin-right: 10px;">{{ form.channel.label}}{{ form.channel()
+                    }}
+                </div>
+
+            </div>
+            <div style="margin-top: 65px; margin-left: 0;"> {{ form.billto.label(class_="input--style-4") }}
+                {{ form.billto() }}</div>
+
+        </fieldset>
+        <hr>
+        <fieldset>
+            <legend><span class="number">2</span>Billing Description</legend>
+            <div></div>
+            <div class="description" style="display: inline-block;position: relative;">
+                {{ form.description1(size=128, placeholder="Product Reimbursent", id="desc1") }}
+                {{ form.amount1(size=8, placeholder="Amount",id="amt1", class="Amount", onchange="findTotal()") }}
+                <div class="upload-group1">
+                    <label for="upload-photo1"><i class="fa fa-cloud-upload"></i></label>
+
+                    <input id="upload-photo1" name='file1' type="file" multiple="multiple" />
+                </div>
+                <div class="upload-group2">
+                    <input type="submit" name="action" id="upload1" value="Upload PR">
+                </div>
+            </div>
+
+            <div class="description" style="position: relative;">
+                {{ form.description2(size=128, placeholder="Influencer Payout", id="desc2") }}
+                {{ form.amount2(size=8, placeholder="Amount",id="amt2",class="Amount", onchange="findTotal()") }}
+            </div>
+            <div class="description" style="display: inline-block;position: relative;">
+                {{ form.description3(size=128, placeholder="Travel Expenses", id="desc3") }}
+                {{ form.amount3(size=8, placeholder="Amount",id="amt3",class="Amount", onchange="findTotal()")
+                }}
+                <div class="upload-group1">
+                    <label for="upload-photo3"><i class="fa fa-cloud-upload" aria-hidden="true"></i></label>
+                    <input id="upload-photo3" name='file3' type="file" multiple="multiple" />
+                </div>
+                <div class="upload-group2">
+                    <input type="submit" name="action" id="upload3" value="Upload TE">
+                </div>
+            </div>
+            <input name="total_fee" , id="total_fee" ,size=5, value="Total" style="margin-top: 5px;" disabled>
+        </fieldset>
+
+        </fieldset>
+
+        {% for message in get_flashed_messages(category_filter=["upload"]) %}
+        <p style="color: rgba(249, 134, 12, 0.97);">{{ message }}</p>
+        {% endfor %}
+        <hr>
+        <fieldset>
+            <legend><span class="number">3</span>Bank Details</legend>
+
+
+            {{ form.bankName(size=32, placeholder="Bank Name") }}
+
+            {{ form.acctHolder(size=32, placeholder="Account Holder") }}
+
+            {{ form.acctNumber(size=16, placeholder="Account Number") }}
+
+            {{ form.IFSC(size=16, placeholder="IFSC") }}
+
+            {{ form.PAN(size=16, placeholder="PAN") }}
+
+        </fieldset>
+
+        <div class="form-group">
+            <div id="divCheckbox" style="display: none;">
+                {{form.submit(id="Submit1", value="Send it")}}
+            </div>
+            <div id="splash" style="display: none; z-index: 10; position:relative">It might take up to 10 seconds to
+                generate the invoice. Please do not submit again!</div>
+            <input type="submit" name="action" id="Submit" value="Submit">
+            <!-- {{ form.submit(class="btn", value="one") }} -->
+        </div>
+
+    </form>
+
+</body>
+
+
+</html>
