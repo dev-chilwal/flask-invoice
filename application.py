@@ -20,10 +20,11 @@ from docx2pdf import convert
 from docx import Document
 import os
 import sys
-import pythoncom
+#import pythoncom
 import traceback
 import config
 import pdfkit
+from sys import platform
 
 # Gdrive Helper functions
 #from gdrive_upload import find_folder, create_folder, callback, grant_permission, upload_to_gdrive
@@ -70,80 +71,6 @@ def login_required(f):
 
 
 ############ HELPER FUNCTIONS ############
-def generate_invoice(data_df):
-    e = ""
-    try:
-        print(os.getcwd(), file=sys.stderr)
-        document = Document(os.path.join(os.getcwd(), 'invoice_template.docx'))
-        data = {
-            "[Name]": "",
-            "[address1]": "",
-            "[address2]": "",
-            "[address3]": "",
-            "[Invoice#]": "",
-            "[Date]": "",
-            "[caddress1]": "",
-            "[caddress2]": "",
-            "[caddress3]": "",
-            "[caddress4]": "",
-            "[desc1]": '',
-            "[amount1]": '',
-            "[desc2]": '',
-            "[amount2]": '',
-            "[desc3]": '',
-            "[amount3]": '',
-            "[TotalAmount]": "",
-            "[bankName]": '',
-            "[acctHolder]": "",
-            "[acctNumber]": 0,
-            "[IFSC]": '',
-            "[PAN]": ''
-        }
-
-        # Update data dict
-        dict_keys = {k.lower() for k in data.keys()}
-        for col in data_df.columns:
-            if "[" + col.lower() + "]" in dict_keys:
-                data["[" + col + "]"] = data_df[col].values[0]
-
-        for i, val in enumerate(data_df['BillTO'].values[0].split("|")):
-            data['[caddress{}]'.format(i+1)] = val.strip()
-
-        for idx, val in enumerate(data_df['Invoice-details'][0]):
-            data['[desc{}]'.format(idx+1)] = val['desc']
-            data['[amount{}]'.format(idx+1)] = val['amount']
-
-        data['[address1]'] = data_df['Address'].values[0]
-        # Update invoice
-        for table in document.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    for paragraph in cell.paragraphs:
-                        if paragraph.text.strip() in data.keys():
-                            paragraph.text = str(
-                                data[paragraph.text.strip()])
-
-        # Create invoice docx
-        user_path = session['path']
-        filename = session['month']+session['program'] + \
-            session['pan']+data['[Invoice#]']
-        print(user_path)
-        invoice_name = os.path.join(
-            user_path, 'invoice_{}.docx'.format(filename))
-        document.save(invoice_name)
-        # Create invoice pdf
-        pdf_name = os.path.join(
-            user_path, '{}.pdf'.format(filename))
-        pythoncom.CoInitialize()
-        convert(invoice_name, pdf_name)
-        # Delete docx
-        os.remove(invoice_name)
-    except:
-        print(traceback.format_exc(), file=sys.stderr)
-        return "error"
-
-    return "success", '{}.pdf'.format(filename)
-
 
 def html2pdf(html_path, pdf_path):
     """
@@ -318,42 +245,6 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField()
 
 
-@application.route('/register1', methods=['POST', 'GET'])
-def register():
-    form = RegistrationForm()
-    # if form.validate_on_submit():
-    if request.method == "POST":
-        firstname = form.firstname.data
-        lastname = form.lastname.data
-        email = form.email.data
-        password = form.password1.data
-        cpassword = form.password2.data
-        bankname = form.bankName.data
-        acctNumber = form.acctNumber.data
-        acctHolder = form.acctHolder.data
-        ifsc = form.IFSC.data
-        pan = form.PAN.data
-
-        userexists = list(users_collection.find({"user": email}, {"_id": 1}))
-        if password != cpassword:
-            flash('Passwords do not match')
-        elif len(userexists) > 0:
-            flash("Email already registered, try logging in.")
-        else:
-            update = users_collection.insert_one(
-                {"user": email, "password": generate_password_hash(password)})
-            bankdetails = {"bankname": bankname,
-                           "acctNumber": acctNumber, "acctHolder": acctHolder, "IFSC": ifsc, "PAN": pan}
-            update_up = user_profile_collection.insert_one(
-                {"email": email, "firstname": firstname, "lastname": lastname, "bankDetails": bankdetails})
-            session['email'] = email
-            # Create folder
-            folder_name = firstname + pan
-            create_folder(folder_name)
-            return redirect(url_for('invoice'))
-    return render_template('register.html', form=form)
-
-
 @application.route('/register', methods=['POST', 'GET'])
 def test():
     form = RegistrationForm()
@@ -474,7 +365,12 @@ def display_invoice():
             print(session['path'])
             for file in glob.glob(path+"/*.pdf"):
                 print(file, parent_folder_2)
-                upload_to_gdrive(file.split("\\")[-1], file, parent_folder_2)
+                if platform == "win32":
+                    upload_to_gdrive(file.split(
+                        "\\")[-1], file, parent_folder_2)
+                else:
+                    upload_to_gdrive(file.split(
+                        "/")[-1], file, parent_folder_2)
 
             return redirect(url_for('invoice'))
 

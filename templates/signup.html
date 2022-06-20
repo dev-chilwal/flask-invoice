@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" , content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Invoice</title>
+    <title>SignUp</title>
 </head>
 
 
@@ -25,17 +25,17 @@
                 <br>
                 <span></span>
                 {{ form.hidden_tag() }}
-                {{ form.firstname(size=32, placeholder = "First Name", class_="input--style-2") }}
+                {{ form.firstname(size=16, placeholder = "First Name", class_="input--style-2") }}
                 {{ form.lastname(size=32, placeholder = "Last Name", class_="input--style-2") }}
                 {{ form.email(size=32, placeholder = "Email", class_="input--style-2") }}
                 {{ form.password1(size=32, placeholder = "Password", class_="input--style-2") }}
                 {{ form.password2(size=32, placeholder = "Confirm password", class_="input--style-2") }}
 
-                <br>
-                <!-- <button name="action" id="signin" value="Sign In">Sign In</button> -->
-                <p onclick="location.href='/login'"><a>Already have an account? <b>Log In.</b></a></p>
 
-                <br>
+                <!-- <button name="action" id="signin" value="Sign In">Sign In</button> -->
+                <p onclick="location.href='/login'"><a>Already have an account? <b>Log
+                            In.</b></a></p>
+
                 {% for message in get_flashed_messages() %}
                 <p style="color: red;">{{ message }}</p>
                 {% endfor %}
