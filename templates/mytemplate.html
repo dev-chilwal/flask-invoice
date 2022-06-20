@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Invoice</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Fascinate&family=Kdam+Thmor+Pro&family=League+Gothic&display=swap"
+        rel="stylesheet">
+    <style type="text/css">
+        .container {
+            max-width: 800px;
+            padding-top: 100px;
+        }
+
+        html {
+
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        p {
+            font-size: medium;
+            text-align: left;
+            display: flex;
+            flex-direction: column
+        }
+
+        h4 {
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            color: rgb(19, 17, 17);
+        }
+
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+
+            font-family: sans-serif;
+            min-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+            table-layout: auto;
+        }
+
+        th.from,
+        th.description {
+            width: 75%;
+            font-size: 1.3em;
+        }
+
+        th.amount {
+            width: 25%;
+            font-size: 1.3em;
+            /* Not necessary, since only 70% width remains */
+        }
+
+        .styled-table thead tr {
+            background-color: #546A76;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            font-size: 1.3em;
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #546A76;
+        }
+
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #546A76;
+            font-size: 1.1em;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap');
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h3 style="text-align:left;float: left; color: #546A76;font-family:  'Kdam Thmor Pro', sans-serif;">
+            <b>BlackMilk Media</b>
+        </h3>
+
+        <h3>
+            <b>
+                <p style="text-align:right;font-size: 1.3em; color: #546A76;font-family:'Kdam Thmor Pro', sans-serif;">
+                    INVOICE
+            </b>
+        </h3>
+
+        </p>
+        <br>
+        <p style=" float: right;">
+
+        <p style=" text-align:right; float: right;"> &nbsp;{{invoicenum}}</p>
+        <p style=" text-align:right; float: right;color: #546A76;">Invoice # </p>
+        <p>{{name}}</p>
+
+        <p style=" text-align:right; float: right;"> &nbsp;{{date}}</p>
+        <p style=" text-align:right; float: right;color: #546A76;">Date </p>
+
+        <p>{{address1}}</p>
+
+        <p>{{address2}}</p>
+        <p>{{address3}}</p>
+
+        <br>
+        <br>
+        <h5 style="font-size: large;color: #546A76;"><b>Bill To</b></h5>
+        <p>{{caddress1}}</p>
+        <p>{{caddress2}}</p>
+        <p>{{caddress3}}</p>
+        <p>{{caddress3}}</p>
+
+        <br>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th class="description">Description</th>
+                    <th class="amount">Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{description1}}</td>
+                    <td>{{amount1}}</td>
+                </tr>
+                <tr>
+                    <td>{{description2}}</td>
+                    <td>{{amount2}}</td>
+                </tr>
+                <tr>
+                    <td>{{description3}}</td>
+                    <td>{{amount3}}</td>
+                </tr>
+                <tr class="active-row">
+                    <td>Total</td>
+                    <td>{{totamount}}</td>
+                </tr>
+                <!-- and so on... -->
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <h3 style="text-align:left; color: #546A76;">Bank Details</h3>
+        <br>
+        <div class="footer">
+
+            Bank Name: {{bankName}} <br>
+            Account Holder: {{acctHolder}}<br>
+            Account Number: {{acctNumber}}<br>
+            IFSC code: {{IFSC}}<br>
+            PAN: {{PAN}}<br>
+            <br>
+            <br>
+
+            <p style="font-size: 14px;">Payments will be issued on the 15th (+/- 5 days) of the following month,
+                All the invoices are sent to Pianosa by 3 days before the payment day, and you have completed the agreed
+                deliverables.<br>
+                If you have any questions concerning this invoice, please contact the team
+                <a href="mailto:influencermanagement@thepianosa.com">influencermanagement@thepianosa.com</a>
+        </div>
+    </div>
+</body>
+
+</html>

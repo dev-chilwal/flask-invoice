@@ -1,8 +1,8 @@
 import glob
 from logging import root
-from tkinter import DISABLED
 from flask import Flask, redirect, render_template, request, send_file, send_from_directory, current_app as app, flash, url_for, session
 from flask_login import login_required
+import jinja2
 
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -22,6 +22,8 @@ import os
 import sys
 import pythoncom
 import traceback
+import config
+import pdfkit
 
 # Gdrive Helper functions
 #from gdrive_upload import find_folder, create_folder, callback, grant_permission, upload_to_gdrive
@@ -141,6 +143,78 @@ def generate_invoice(data_df):
         return "error"
 
     return "success", '{}.pdf'.format(filename)
+
+
+def html2pdf(html_path, pdf_path):
+    """
+    Convert html to pdf using pdfkit which is a wrapper of wkhtmltopdf
+    """
+    path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    options = {
+        'page-size': 'Letter',
+        'margin-top': '0.35in',
+        'margin-right': '0.75in',
+        'margin-bottom': '0.75in',
+        'margin-left': '0.75in',
+        'encoding': "UTF-8",
+        'no-outline': None,
+        'enable-local-file-access': None
+    }
+    # with open(html_path) as f:
+    #pdfkit.from_file(f, pdf_path, configuration=config)
+    pdfkit.from_file(html_path, pdf_path, options=options, verbose=True)
+
+
+def generate_invoice_html(data_df):
+
+    try:
+        template_loader = jinja2.FileSystemLoader(
+            searchpath="./templates/")
+        template_env = jinja2.Environment(loader=template_loader)
+        template_file = "mytemplate.html"
+        template = template_env.get_template(template_file)
+        for idx, row in data_df.iterrows():
+            output_text = template.render(
+                name=row.Name,
+                address1=row.Address,
+                caddress1=row.BillTO,
+                invoicenum=row['Invoice#'],
+                date=row.Date,
+                description1=row['Invoice-details'][0]['desc'],
+                amount1=row['Invoice-details'][0]['amount'],
+                description2=row['Invoice-details'][1]['desc'],
+                amount2=row['Invoice-details'][1]['amount'],
+                description3=row['Invoice-details'][2]['desc'],
+                amount3=row['Invoice-details'][2]['amount'],
+                totamount=row.TotalAmount,
+                bankName=row.bankName,
+                acctHolder=row.acctHolder,
+                acctNumber=row.acctNumber,
+                IFSC=row.IFSC,
+                PAN=row.PAN
+            )
+
+            user_path = session['path']
+            filename = session['month']+session['program'] + \
+                session['pan']+data_df['Invoice#']
+            print(user_path, filename[0])
+            invoice_name = os.path.join(
+                user_path, '{}'.format(filename[0]))
+            html_path = f'{invoice_name}.html'
+            html_file = open(html_path, 'w', encoding="utf-8")
+            html_file.write(output_text)
+            html_file.close()
+            # Generate pdf
+            pdf_path = f'{invoice_name}.pdf'
+            html2pdf(html_path, pdf_path)
+            # Delete hmtl
+            os.remove(html_path)
+    except:
+        print(traceback.format_exc(), file=sys.stderr)
+        return "error"
+
+    return "success", '{}.pdf'.format(filename[0])
 
 
 def allowed_file(filename):
@@ -513,8 +587,10 @@ def invoice():
                 x for x in files if PAN and datetime.now().strftime("%B") in x]
             for f in files_to_delete:
                 os.remove(f)
+
             # Generate Invoice
-            err, filename = generate_invoice(data_df)
+            #err, filename = generate_invoice(data_df)
+            err, filename = generate_invoice_html(data_df)
             session['invoice'] = filename
             if err == "success":
                 print("Invoice generated successfully", filename)
