@@ -16,8 +16,8 @@ from wtforms import MultipleFileField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 import pandas as pd
 from datetime import datetime, timedelta
-from docx2pdf import convert
-from docx import Document
+#from docx2pdf import convert
+#from docx import Document
 import os
 import sys
 #import pythoncom
