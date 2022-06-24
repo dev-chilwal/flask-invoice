@@ -76,8 +76,8 @@ def html2pdf(html_path, pdf_path):
     """
     Convert html to pdf using pdfkit which is a wrapper of wkhtmltopdf
     """
-    path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+    #path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+    #config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
     options = {
         'page-size': 'Letter',
         'margin-top': '0.35in',
